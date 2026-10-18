@@ -1,0 +1,20 @@
+{"seq": 0, "ts": 1792305488300, "type": "run.started", "agent": "orchestrator", "data": {"run_id": "run_ceb7acb4", "tenant": "northwind", "mode": "respond", "mission": "payments-api latency spike", "conversation_id": "cnv_bc66432e"}}
+{"seq": 1, "ts": 1792305488301, "type": "agent.status", "agent": "orchestrator", "data": {"status": "Prefetching graph memory..."}}
+{"seq": 2, "ts": 1792305488414, "type": "memory.recalled", "agent": "orchestrator", "data": {"items": {"episodes": ["epi_2041", "epi_2f07c5c5"], "facts": [], "procedures": ["prc_ledger_pool"]}, "count": 3}}
+{"seq": 3, "ts": 1792305488421, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_62fad9ad", "kind": "investigate"}}
+{"seq": 4, "ts": 1792305488421, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_d34930bc", "kind": "recall"}}
+{"seq": 5, "ts": 1792305488426, "type": "task.claimed", "agent": "scout", "data": {"task_id": "tsk_62fad9ad"}}
+{"seq": 6, "ts": 1792305488426, "type": "agent.status", "agent": "scout", "data": {"status": "Scout investigating topology and blast radius..."}}
+{"seq": 7, "ts": 1792305488432, "type": "task.claimed", "agent": "archivist", "data": {"task_id": "tsk_d34930bc"}}
+{"seq": 8, "ts": 1792305488432, "type": "agent.status", "agent": "archivist", "data": {"status": "Archivist searching past incidents and runbooks..."}}
+{"seq": 9, "ts": 1792305488433, "type": "task.done", "agent": "scout", "data": {"task_id": "tsk_62fad9ad", "findings": "Scout found [[svc_payments_api]]."}}
+{"seq": 10, "ts": 1792305488492, "type": "task.done", "agent": "archivist", "data": {"task_id": "tsk_d34930bc", "findings": "Archivist found [[inc_2041]]."}}
+{"seq": 11, "ts": 1792305488494, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_8494e406", "kind": "act"}}
+{"seq": 12, "ts": 1792305488496, "type": "handoff", "agent": "orchestrator", "data": {"from": "scout & archivist", "to": "responder", "note": "Handoff to formulate remediation actions"}}
+{"seq": 13, "ts": 1792305488502, "type": "task.claimed", "agent": "responder", "data": {"task_id": "tsk_8494e406"}}
+{"seq": 14, "ts": 1792305488503, "type": "agent.status", "agent": "responder", "data": {"status": "Responder formulating action proposals..."}}
+{"seq": 15, "ts": 1792305488506, "type": "action.proposed", "agent": "responder", "data": {"action": {"id": "act_eb7b4bf7", "kind": "page_person", "payload": {"person_id": "per_dev_okafor", "person_name": "Dev Okafor", "message": "Inspect pool", "reason": "Expert for [[svc_ledger_db]]"}, "status": "proposed"}}}
+{"seq": 16, "ts": 1792305488508, "type": "task.done", "agent": "responder", "data": {"task_id": "tsk_8494e406", "actions": [{"id": "act_eb7b4bf7", "kind": "page_person", "payload": {"person_id": "per_dev_okafor", "person_name": "Dev Okafor", "message": "Inspect pool", "reason": "Expert for [[svc_ledger_db]]"}, "status": "proposed"}]}}
+{"seq": 17, "ts": 1792305488509, "type": "agent.status", "agent": "synthesizer", "data": {"status": "Synthesizing grounded response..."}}
+{"seq": 18, "ts": 1792305488513, "type": "answer.final", "agent": "synthesizer", "data": {"answer_id": "ans_a18cea80", "text": "Summary of [[svc_payments_api]] linked to [[inc_2041]].", "citations": ["svc_payments_api", "inc_2041"], "ungrounded": [], "ungrounded_count": 0}}
+{"seq": 19, "ts": 1792305488514, "type": "run.completed", "agent": "orchestrator", "data": {"metrics": {"tool_calls": 3, "duration_ms": 217, "memories_recalled": 3, "ungrounded_count": 0, "valid_citations_count": 2, "evidence_nodes_count": 16}}}

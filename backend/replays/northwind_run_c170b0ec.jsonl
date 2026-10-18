@@ -1,0 +1,20 @@
+{"seq": 0, "ts": 1792311968790, "type": "run.started", "agent": "orchestrator", "data": {"run_id": "run_c170b0ec", "tenant": "northwind", "mode": "respond", "mission": "ledger-db alert", "conversation_id": "cnv_b84b6394"}}
+{"seq": 1, "ts": 1792311968791, "type": "agent.status", "agent": "orchestrator", "data": {"status": "Prefetching graph memory..."}}
+{"seq": 2, "ts": 1792311968882, "type": "memory.recalled", "agent": "orchestrator", "data": {"items": {"episodes": ["epi_2041"], "facts": [], "procedures": ["prc_ledger_pool"]}, "count": 2}}
+{"seq": 3, "ts": 1792311968885, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_e1e73181", "kind": "investigate"}}
+{"seq": 4, "ts": 1792311968885, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_e4864f75", "kind": "recall"}}
+{"seq": 5, "ts": 1792311968889, "type": "task.claimed", "agent": "scout", "data": {"task_id": "tsk_e1e73181"}}
+{"seq": 6, "ts": 1792311968889, "type": "agent.status", "agent": "scout", "data": {"status": "Scout investigating topology and blast radius..."}}
+{"seq": 7, "ts": 1792311968890, "type": "task.claimed", "agent": "archivist", "data": {"task_id": "tsk_e4864f75"}}
+{"seq": 8, "ts": 1792311968890, "type": "agent.status", "agent": "archivist", "data": {"status": "Archivist searching past incidents and runbooks..."}}
+{"seq": 9, "ts": 1792311968893, "type": "task.done", "agent": "scout", "data": {"task_id": "tsk_e1e73181", "findings": "Observation"}}
+{"seq": 10, "ts": 1792311968895, "type": "task.done", "agent": "archivist", "data": {"task_id": "tsk_e4864f75", "findings": "Observation"}}
+{"seq": 11, "ts": 1792311968899, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_ad1265b8", "kind": "act"}}
+{"seq": 12, "ts": 1792311968902, "type": "handoff", "agent": "orchestrator", "data": {"from": "scout & archivist", "to": "responder", "note": "Handoff to formulate remediation actions"}}
+{"seq": 13, "ts": 1792311968905, "type": "task.claimed", "agent": "responder", "data": {"task_id": "tsk_ad1265b8"}}
+{"seq": 14, "ts": 1792311968905, "type": "agent.status", "agent": "responder", "data": {"status": "Responder formulating action proposals..."}}
+{"seq": 15, "ts": 1792311968910, "type": "action.proposed", "agent": "responder", "data": {"action": {"id": "act_74e5e819", "kind": "create_ticket", "payload": {"service_id": "svc_ledger_db", "service_name": "ledger-db", "title": "Scale pool", "body": "Increase max_client_conn", "reason": "Resolves [[svc_payments_api]]"}, "status": "proposed"}}}
+{"seq": 16, "ts": 1792311968912, "type": "task.done", "agent": "responder", "data": {"task_id": "tsk_ad1265b8", "actions": [{"id": "act_74e5e819", "kind": "create_ticket", "payload": {"service_id": "svc_ledger_db", "service_name": "ledger-db", "title": "Scale pool", "body": "Increase max_client_conn", "reason": "Resolves [[svc_payments_api]]"}, "status": "proposed"}]}}
+{"seq": 17, "ts": 1792311968912, "type": "agent.status", "agent": "synthesizer", "data": {"status": "Synthesizing grounded response..."}}
+{"seq": 18, "ts": 1792311968920, "type": "answer.final", "agent": "synthesizer", "data": {"answer_id": "ans_562c728a", "text": "Answer with [[svc_ledger_db]].", "citations": ["svc_ledger_db"], "ungrounded": [], "ungrounded_count": 0}}
+{"seq": 19, "ts": 1792311968921, "type": "run.completed", "agent": "orchestrator", "data": {"metrics": {"tool_calls": 1, "duration_ms": 133, "memories_recalled": 2, "ungrounded_count": 0, "valid_citations_count": 1, "evidence_nodes_count": 2}}}

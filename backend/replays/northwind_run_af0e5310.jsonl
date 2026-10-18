@@ -1,0 +1,19 @@
+{"seq": 0, "ts": 1792251316185, "type": "run.started", "agent": "orchestrator", "data": {"run_id": "run_af0e5310", "tenant": "northwind", "mode": "respond", "mission": "payments-api p99 latency spike", "conversation_id": "cnv_1a59d1bc"}}
+{"seq": 1, "ts": 1792251316185, "type": "agent.status", "agent": "orchestrator", "data": {"status": "Prefetching graph memory..."}}
+{"seq": 2, "ts": 1792251317138, "type": "memory.recalled", "agent": "orchestrator", "data": {"items": {"episodes": ["epi_2041"], "facts": [], "procedures": ["prc_ledger_pool"]}, "count": 2}}
+{"seq": 3, "ts": 1792251317141, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_18598fdb", "kind": "investigate"}}
+{"seq": 4, "ts": 1792251317145, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_be93cec9", "kind": "recall"}}
+{"seq": 5, "ts": 1792251317152, "type": "task.claimed", "agent": "scout", "data": {"task_id": "tsk_18598fdb"}}
+{"seq": 6, "ts": 1792251317153, "type": "agent.status", "agent": "scout", "data": {"status": "Scout investigating topology and blast radius..."}}
+{"seq": 7, "ts": 1792251317158, "type": "task.claimed", "agent": "archivist", "data": {"task_id": "tsk_be93cec9"}}
+{"seq": 8, "ts": 1792251317159, "type": "agent.status", "agent": "archivist", "data": {"status": "Archivist searching past incidents and runbooks..."}}
+{"seq": 9, "ts": 1792251317165, "type": "task.done", "agent": "scout", "data": {"task_id": "tsk_18598fdb", "findings": "Scout found [[svc_payments_api]] dependents [[svc_checkout_api]]."}}
+{"seq": 10, "ts": 1792251317898, "type": "task.done", "agent": "archivist", "data": {"task_id": "tsk_be93cec9", "findings": "Archivist found [[inc_2041]]."}}
+{"seq": 11, "ts": 1792251317900, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_6fc5374a", "kind": "act"}}
+{"seq": 12, "ts": 1792251317904, "type": "handoff", "agent": "orchestrator", "data": {"from": "scout & archivist", "to": "responder", "note": "Handoff to formulate remediation actions"}}
+{"seq": 13, "ts": 1792251317906, "type": "task.claimed", "agent": "responder", "data": {"task_id": "tsk_6fc5374a"}}
+{"seq": 14, "ts": 1792251317906, "type": "agent.status", "agent": "responder", "data": {"status": "Responder formulating action proposals..."}}
+{"seq": 15, "ts": 1792251317909, "type": "task.done", "agent": "responder", "data": {"task_id": "tsk_6fc5374a", "actions": []}}
+{"seq": 16, "ts": 1792251317909, "type": "agent.status", "agent": "synthesizer", "data": {"status": "Synthesizing grounded response..."}}
+{"seq": 17, "ts": 1792251317914, "type": "answer.final", "agent": "synthesizer", "data": {"answer_id": "ans_44f33af4", "text": "### Summary\nHigh latency on [[svc_payments_api]].\n\n### Likely cause\nConnection saturation documented in [[inc_2041]].\n\n### Ungrounded Hallucination\nInvented node fake_invented_service.", "citations": ["svc_payments_api", "inc_2041"], "ungrounded": ["fake_invented_service"], "ungrounded_count": 1}}
+{"seq": 18, "ts": 1792251317916, "type": "run.completed", "agent": "orchestrator", "data": {"metrics": {"tool_calls": 3, "duration_ms": 1749, "memories_recalled": 2, "ungrounded_count": 1, "valid_citations_count": 2, "evidence_nodes_count": 16}}}

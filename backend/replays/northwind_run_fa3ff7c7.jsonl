@@ -1,0 +1,10 @@
+{"seq": 0, "ts": 1792255270670, "type": "run.started", "agent": "orchestrator", "data": {"run_id": "run_3104a807", "tenant": "northwind", "mode": "respond", "mission": "payments-api p99 latency is 4.2s and 5xx errors are at 8%", "conversation_id": "cnv_1f1b4332"}}
+{"seq": 1, "ts": 1792255270670, "type": "agent.status", "agent": "orchestrator", "data": {"status": "Prefetching graph memory..."}}
+{"seq": 2, "ts": 1792255270774, "type": "memory.recalled", "agent": "orchestrator", "data": {"items": {"episodes": ["epi_2041"], "facts": [], "procedures": ["prc_ledger_pool"]}, "count": 2}}
+{"seq": 3, "ts": 1792255270777, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_9c37687d", "kind": "investigate"}}
+{"seq": 4, "ts": 1792255270778, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_d9b5424d", "kind": "recall"}}
+{"seq": 5, "ts": 1792255270783, "type": "task.claimed", "agent": "scout", "data": {"task_id": "tsk_9c37687d"}}
+{"seq": 6, "ts": 1792255270784, "type": "agent.status", "agent": "scout", "data": {"status": "Scout investigating topology and blast radius..."}}
+{"seq": 7, "ts": 1792255270790, "type": "task.claimed", "agent": "archivist", "data": {"task_id": "tsk_d9b5424d"}}
+{"seq": 8, "ts": 1792255270790, "type": "agent.status", "agent": "archivist", "data": {"status": "Archivist searching past incidents and runbooks..."}}
+{"seq": 9, "ts": 1792255630805, "type": "run.failed", "agent": "orchestrator", "data": {"error": "Investigation phase timed out after 180 seconds"}}

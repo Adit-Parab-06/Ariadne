@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #FFFFFF;
+  --bg-2: #F2F2F7;
+  --bg-3: #FFFFFF;
+  --label: #1D1D1F;
+  --label-2: #3A3A3C;
+  --label-3: #636366;
+  --sep: rgba(60,60,67,.18);
+  --fill: rgba(120,120,128,.14);
+  --blue: #0071E3;
+  --green: #34C759;
+  --orange: #FF9500;
+  --red: #FF3B30;
+  --indigo: #5856D6;
+  --purple: #AF52DE;
+  --teal: #30B0C7;
+  --material: rgba(255,255,255,.82);
+  --shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --bg-2: #1C1C1E;
+    --bg-3: #2C2C2E;
+    --label: #F5F5F7;
+    --label-2: #D1D1D6;
+    --label-3: #98989D;
+    --sep: rgba(84,84,88,.45);
+    --fill: rgba(120,120,128,.28);
+    --blue: #0A84FF;
+    --green: #30D158;
+    --orange: #FF9F0A;
+    --red: #FF453A;
+    --indigo: #5E5CE6;
+    --purple: #BF5AF2;
+    --teal: #40C8E0;
+    --material: rgba(30,30,30,.82);
+    --shadow: 0 8px 30px rgba(0,0,0,.5);
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--label);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Apple blur material header/toolbar */
+.apple-glass {
+  background-color: var(--material);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+/* Hairline border */
+.apple-border {
+  border-color: var(--sep);
+}
+
+/* Custom scrollbar matching macOS */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fill);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--label-3);
+}
+
+/* Illustrious dynamic background animations for Evidence Graph */
+@keyframes nebula-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.18);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-20px, 25px) scale(0.92);
+    opacity: 0.65;
+  }
+}
+
+@keyframes nebula-float-reverse {
+  0% {
+    transform: translate(0, 0) scale(1.1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-35px, 25px) scale(0.88);
+    opacity: 0.90;
+  }
+  100% {
+    transform: translate(25px, -15px) scale(1.15);
+    opacity: 0.55;
+  }
+}
+
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-nebula {
+  animation: nebula-float 14s ease-in-out infinite alternate;
+}
+
+.animate-nebula-reverse {
+  animation: nebula-float-reverse 18s ease-in-out infinite alternate;
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 12s linear infinite;
+  transform-origin: center center;
+}
+

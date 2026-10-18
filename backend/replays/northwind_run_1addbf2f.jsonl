@@ -1,0 +1,14 @@
+{"seq": 0, "ts": 1792258688965, "type": "run.started", "agent": "orchestrator", "data": {"run_id": "run_1addbf2f", "tenant": "northwind", "mode": "ask", "mission": "What are the dependencies of auth-service?", "conversation_id": "cnv_97ffd170"}}
+{"seq": 1, "ts": 1792258688966, "type": "agent.status", "agent": "orchestrator", "data": {"status": "Prefetching graph memory..."}}
+{"seq": 2, "ts": 1792258689060, "type": "memory.recalled", "agent": "orchestrator", "data": {"items": {"episodes": ["epi_2041"], "facts": [], "procedures": ["prc_ledger_pool"]}, "count": 2}}
+{"seq": 3, "ts": 1792258689066, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_029653c9", "kind": "investigate"}}
+{"seq": 4, "ts": 1792258689067, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_70cdc290", "kind": "recall"}}
+{"seq": 5, "ts": 1792258689072, "type": "task.claimed", "agent": "archivist", "data": {"task_id": "tsk_70cdc290"}}
+{"seq": 6, "ts": 1792258689073, "type": "agent.status", "agent": "archivist", "data": {"status": "Archivist searching past incidents and runbooks..."}}
+{"seq": 7, "ts": 1792258689073, "type": "task.claimed", "agent": "scout", "data": {"task_id": "tsk_029653c9"}}
+{"seq": 8, "ts": 1792258689073, "type": "agent.status", "agent": "scout", "data": {"status": "Scout investigating topology and blast radius..."}}
+{"seq": 9, "ts": 1792258689074, "type": "task.done", "agent": "archivist", "data": {"task_id": "tsk_70cdc290", "findings": "Observation."}}
+{"seq": 10, "ts": 1792258689075, "type": "task.done", "agent": "scout", "data": {"task_id": "tsk_029653c9", "findings": "Observation."}}
+{"seq": 11, "ts": 1792258689075, "type": "agent.status", "agent": "synthesizer", "data": {"status": "Synthesizing grounded response..."}}
+{"seq": 12, "ts": 1792258689080, "type": "answer.final", "agent": "synthesizer", "data": {"answer_id": "ans_460a89db", "text": "Answer.", "citations": [], "ungrounded": [], "ungrounded_count": 0}}
+{"seq": 13, "ts": 1792258689083, "type": "run.completed", "agent": "orchestrator", "data": {"metrics": {"tool_calls": 0, "duration_ms": 126, "memories_recalled": 2, "ungrounded_count": 0, "valid_citations_count": 0, "evidence_nodes_count": 0}}}

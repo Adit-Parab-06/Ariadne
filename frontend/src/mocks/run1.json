@@ -1,0 +1,406 @@
+{
+  "__MOCK_METADATA__": {
+    "is_mock": true,
+    "description": "Scripted mock event stream for offline development and UI verification. NEVER PRESENT AS REAL RUNS IN PRODUCTION.",
+    "tenant": "northwind",
+    "run_id": "run_mock_hero_01"
+  },
+  "events": [
+    {
+      "seq": 0,
+      "ts": 1792258869000,
+      "type": "run.started",
+      "agent": "orchestrator",
+      "data": {
+        "run_id": "run_mock_hero_01",
+        "tenant": "northwind",
+        "mode": "respond",
+        "mission": "payments-api p99 latency is 4.2s and 5xx errors are at 8%",
+        "conversation_id": "cnv_mock_01"
+      }
+    },
+    {
+      "seq": 1,
+      "ts": 1792258869100,
+      "type": "agent.status",
+      "agent": "orchestrator",
+      "data": { "status": "Prefetching graph memory..." }
+    },
+    {
+      "seq": 2,
+      "ts": 1792258869300,
+      "type": "memory.recalled",
+      "agent": "orchestrator",
+      "data": {
+        "items": {
+          "episodes": ["epi_2041"],
+          "facts": [],
+          "procedures": ["prc_ledger_pool"]
+        },
+        "count": 2
+      }
+    },
+    {
+      "seq": 3,
+      "ts": 1792258869400,
+      "type": "task.created",
+      "agent": "orchestrator",
+      "data": { "task_id": "tsk_inv_01", "kind": "investigate" }
+    },
+    {
+      "seq": 4,
+      "ts": 1792258869410,
+      "type": "task.created",
+      "agent": "orchestrator",
+      "data": { "task_id": "tsk_rec_01", "kind": "recall" }
+    },
+    {
+      "seq": 5,
+      "ts": 1792258869500,
+      "type": "task.claimed",
+      "agent": "scout",
+      "data": { "task_id": "tsk_inv_01" }
+    },
+    {
+      "seq": 6,
+      "ts": 1792258869510,
+      "type": "agent.status",
+      "agent": "scout",
+      "data": { "status": "Scout investigating topology and blast radius..." }
+    },
+    {
+      "seq": 7,
+      "ts": 1792258869550,
+      "type": "task.claimed",
+      "agent": "archivist",
+      "data": { "task_id": "tsk_rec_01" }
+    },
+    {
+      "seq": 8,
+      "ts": 1792258869560,
+      "type": "agent.status",
+      "agent": "archivist",
+      "data": { "status": "Archivist searching past incidents and runbooks..." }
+    },
+    {
+      "seq": 9,
+      "ts": 1792258871000,
+      "type": "tool.call",
+      "agent": "archivist",
+      "data": { "tool": "resolve_service", "args": { "query": "payments-api" } }
+    },
+    {
+      "seq": 10,
+      "ts": 1792258871050,
+      "type": "tool.result",
+      "agent": "archivist",
+      "data": {
+        "tool": "resolve_service",
+        "summary": "Found 1 service(s) matching 'payments-api'",
+        "evidence": {
+          "nodes": [{ "id": "svc_payments_api", "label": "Service", "name": "payments-api" }],
+          "edges": []
+        },
+        "cypher": ["MATCH (s:Service) WHERE toLower(s.name) CONTAINS 'payments-api' RETURN s"],
+        "ms": 2
+      }
+    },
+    {
+      "seq": 11,
+      "ts": 1792258872000,
+      "type": "tool.call",
+      "agent": "scout",
+      "data": { "tool": "resolve_service", "args": { "query": "payments-api" } }
+    },
+    {
+      "seq": 12,
+      "ts": 1792258872050,
+      "type": "tool.result",
+      "agent": "scout",
+      "data": {
+        "tool": "resolve_service",
+        "summary": "Found 1 service(s) matching 'payments-api'",
+        "evidence": {
+          "nodes": [{ "id": "svc_payments_api", "label": "Service", "name": "payments-api" }],
+          "edges": []
+        },
+        "cypher": ["MATCH (s:Service) WHERE toLower(s.name) CONTAINS 'payments-api' RETURN s"],
+        "ms": 2
+      }
+    },
+    {
+      "seq": 13,
+      "ts": 1792258873500,
+      "type": "tool.call",
+      "agent": "archivist",
+      "data": {
+        "tool": "similar_incidents",
+        "args": { "service_ids": ["svc_payments_api"], "text": "payments-api latency spike" }
+      }
+    },
+    {
+      "seq": 14,
+      "ts": 1792258873600,
+      "type": "tool.result",
+      "agent": "archivist",
+      "data": {
+        "tool": "similar_incidents",
+        "summary": "Found 3 similar incident(s)",
+        "evidence": {
+          "nodes": [
+            { "id": "inc_2041", "label": "Incident", "name": "payments-api p99 latency spike and elevated 5xx" },
+            { "id": "svc_ledger_db", "label": "Service", "name": "ledger-db" },
+            { "id": "doc_rb_ledger_pool", "label": "Doc", "name": "Ledger connection pool saturation" },
+            { "id": "per_priya_nair", "label": "Person", "name": "Priya Nair" }
+          ],
+          "edges": [
+            { "src": "inc_2041", "rel": "AFFECTED", "dst": "svc_payments_api" },
+            { "src": "inc_2041", "rel": "AFFECTED", "dst": "svc_ledger_db" },
+            { "src": "inc_2041", "rel": "RESOLVED_WITH", "dst": "doc_rb_ledger_pool" },
+            { "src": "per_priya_nair", "rel": "RESOLVED", "dst": "inc_2041" }
+          ]
+        },
+        "cypher": ["CALL db.idx.vector.queryNodes('Incident', 'embedding', 3, $vec) YIELD node"],
+        "ms": 24
+      }
+    },
+    {
+      "seq": 15,
+      "ts": 1792258874500,
+      "type": "tool.call",
+      "agent": "archivist",
+      "data": { "tool": "find_experts", "args": { "service_id": "svc_payments_api" } }
+    },
+    {
+      "seq": 16,
+      "ts": 1792258874550,
+      "type": "tool.result",
+      "agent": "archivist",
+      "data": {
+        "tool": "find_experts",
+        "summary": "Found 4 expert(s) for svc_payments_api. Recommended: Dev Okafor (Skipped on-leave: Priya Nair)",
+        "evidence": {
+          "nodes": [
+            { "id": "per_dev_okafor", "label": "Person", "name": "Dev Okafor" },
+            { "id": "per_priya_nair", "label": "Person", "name": "Priya Nair" }
+          ],
+          "edges": [
+            { "src": "per_dev_okafor", "rel": "WORKED_ON", "dst": "svc_payments_api" },
+            { "src": "per_priya_nair", "rel": "WORKED_ON", "dst": "svc_payments_api" }
+          ]
+        },
+        "cypher": ["MATCH (x:Service {id: $sid}) MATCH (p:Person)..."],
+        "ms": 8
+      }
+    },
+    {
+      "seq": 17,
+      "ts": 1792258875500,
+      "type": "tool.call",
+      "agent": "scout",
+      "data": { "tool": "blast_radius", "args": { "direction": "dependencies", "service_id": "svc_payments_api" } }
+    },
+    {
+      "seq": 18,
+      "ts": 1792258875550,
+      "type": "tool.result",
+      "agent": "scout",
+      "data": {
+        "tool": "blast_radius",
+        "summary": "Blast radius (dependencies) for svc_payments_api: found 4 service(s) within 4 hops",
+        "evidence": {
+          "nodes": [
+            { "id": "svc_payments_api", "label": "Service", "name": "payments-api" },
+            { "id": "svc_ledger_db", "label": "Service", "name": "ledger-db" },
+            { "id": "svc_event_bus", "label": "Service", "name": "event-bus" },
+            { "id": "svc_fraud_service", "label": "Service", "name": "fraud-service" }
+          ],
+          "edges": [
+            { "src": "svc_payments_api", "rel": "DEPENDS_ON", "dst": "svc_ledger_db" },
+            { "src": "svc_payments_api", "rel": "DEPENDS_ON", "dst": "svc_event_bus" },
+            { "src": "svc_payments_api", "rel": "DEPENDS_ON", "dst": "svc_fraud_service" }
+          ]
+        },
+        "cypher": ["MATCH (x:Service {id: $sid}) MATCH p = (x)-[:DEPENDS_ON*1..4]->(s:Service) RETURN s"],
+        "ms": 6
+      }
+    },
+    {
+      "seq": 19,
+      "ts": 1792258876800,
+      "type": "tool.call",
+      "agent": "scout",
+      "data": { "tool": "blast_radius", "args": { "direction": "dependents", "service_id": "svc_payments_api" } }
+    },
+    {
+      "seq": 20,
+      "ts": 1792258876850,
+      "type": "tool.result",
+      "agent": "scout",
+      "data": {
+        "tool": "blast_radius",
+        "summary": "Blast radius (dependents) for svc_payments_api: found 2 service(s) within 4 hops",
+        "evidence": {
+          "nodes": [
+            { "id": "svc_checkout_api", "label": "Service", "name": "checkout-api" },
+            { "id": "svc_checkout_web", "label": "Service", "name": "checkout-web" },
+            { "id": "cus_pinecrest_bank", "label": "Customer", "name": "Pinecrest Bank" },
+            { "id": "cus_helios_retail", "label": "Customer", "name": "Helios Retail" },
+            { "id": "cus_orbit_pay", "label": "Customer", "name": "Orbit Pay" }
+          ],
+          "edges": [
+            { "src": "svc_checkout_api", "rel": "DEPENDS_ON", "dst": "svc_payments_api" },
+            { "src": "svc_checkout_web", "rel": "DEPENDS_ON", "dst": "svc_checkout_api" },
+            { "src": "cus_pinecrest_bank", "rel": "USES", "dst": "svc_checkout_web" }
+          ]
+        },
+        "cypher": ["MATCH (x:Service {id: $sid}) MATCH p = (s:Service)-[:DEPENDS_ON*1..4]->(x) RETURN s"],
+        "ms": 8
+      }
+    },
+    {
+      "seq": 21,
+      "ts": 1792258878000,
+      "type": "task.done",
+      "agent": "archivist",
+      "data": {
+        "task_id": "tsk_rec_01",
+        "findings": "Incident inc_2041 shows identical ledger-db pool saturation. Procedure prc_ledger_pool and runbook doc_rb_ledger_pool resolve it. Expert Dev Okafor is available; Priya Nair is on leave."
+      }
+    },
+    {
+      "seq": 22,
+      "ts": 1792258878500,
+      "type": "task.done",
+      "agent": "scout",
+      "data": {
+        "task_id": "tsk_inv_01",
+        "findings": "payments-api is degraded. Dependencies: ledger-db, event-bus, fraud-service. Upstream dependents: checkout-api and checkout-web. Key accounts affected: Pinecrest Bank, Helios Retail, Orbit Pay."
+      }
+    },
+    {
+      "seq": 23,
+      "ts": 1792258878600,
+      "type": "task.created",
+      "agent": "orchestrator",
+      "data": { "task_id": "tsk_act_01", "kind": "act" }
+    },
+    {
+      "seq": 24,
+      "ts": 1792258878650,
+      "type": "handoff",
+      "agent": "orchestrator",
+      "data": {
+        "from": "scout & archivist",
+        "to": "responder",
+        "note": "Handoff to formulate remediation actions"
+      }
+    },
+    {
+      "seq": 25,
+      "ts": 1792258878700,
+      "type": "task.claimed",
+      "agent": "responder",
+      "data": { "task_id": "tsk_act_01" }
+    },
+    {
+      "seq": 26,
+      "ts": 1792258878750,
+      "type": "agent.status",
+      "agent": "responder",
+      "data": { "status": "Responder formulating action proposals..." }
+    },
+    {
+      "seq": 27,
+      "ts": 1792258880000,
+      "type": "action.proposed",
+      "agent": "responder",
+      "data": {
+        "action": {
+          "id": "act_mock_01",
+          "kind": "page_person",
+          "payload": {
+            "person_id": "per_dev_okafor",
+            "person_name": "Dev Okafor",
+            "message": "ledger-db connection pool saturation causing payments-api latency spike. Please assist.",
+            "reason": "Dev Okafor is available and senior expert for ledger-db [[per_dev_okafor], [inc_2041]]."
+          },
+          "status": "proposed"
+        }
+      }
+    },
+    {
+      "seq": 28,
+      "ts": 1792258880200,
+      "type": "action.proposed",
+      "agent": "responder",
+      "data": {
+        "action": {
+          "id": "act_mock_02",
+          "kind": "create_ticket",
+          "payload": {
+            "service_id": "svc_ledger_db",
+            "service_name": "ledger-db",
+            "title": "Resolve ledger-db pgbouncer pool exhaustion",
+            "body": "Inspect pgbouncer pools, increase max_client_conn and reload per doc_rb_ledger_pool.",
+            "reason": "Prevents cascading 5xx errors across payments-api [[svc_payments_api], [inc_2041]]."
+          },
+          "status": "proposed"
+        }
+      }
+    },
+    {
+      "seq": 29,
+      "ts": 1792258880400,
+      "type": "action.proposed",
+      "agent": "responder",
+      "data": {
+        "action": {
+          "id": "act_mock_03",
+          "kind": "post_status_update",
+          "payload": {
+            "audience": "customers",
+            "text": "We are currently investigating elevated latency and 5xx errors on checkout flows.",
+            "reason": "Impacts enterprise accounts Orbit Pay, Pinecrest Bank, and Helios Retail [[cus_pinecrest_bank]]."
+          },
+          "status": "proposed"
+        }
+      }
+    },
+    {
+      "seq": 30,
+      "ts": 1792258881500,
+      "type": "agent.status",
+      "agent": "synthesizer",
+      "data": { "status": "Synthesizing grounded response..." }
+    },
+    {
+      "seq": 31,
+      "ts": 1792258883000,
+      "type": "answer.final",
+      "agent": "synthesizer",
+      "data": {
+        "answer_id": "ans_mock_01",
+        "text": "### Summary\n`payments-api` (`svc_payments_api`) is experiencing severe latency degradation (4.2s p99) and an 8% 5xx error rate [[svc_payments_api]].\n\n### Likely cause\nConnection pool saturation at the Tier-0 critical `ledger-db` (`svc_ledger_db`) pgbouncer, directly matching past outage [[inc_2041]].\n\n### Impact\nUpstream dependents `checkout-api` (`svc_checkout_api`) and `checkout-web` (`svc_checkout_web`) are affected, causing degraded experience for key enterprise accounts including [[cus_pinecrest_bank]], [[cus_helios_retail]], and [[cus_orbit_pay]].\n\n### What to do\nFollow runbook [[doc_rb_ledger_pool]] and procedure [[prc_ledger_pool]] to raise `max_client_conn` and reload pgbouncer. Page available senior engineer [[per_dev_okafor]] (Priya Nair is on leave).\n\n### What we remember\nFrom [[inc_2041]], worker concurrency deploys must be paired with proportional pool adjustments to avoid connection starvation.",
+        "citations": ["svc_payments_api", "inc_2041", "doc_rb_ledger_pool", "prc_ledger_pool", "per_dev_okafor", "cus_pinecrest_bank", "cus_helios_retail", "cus_orbit_pay"],
+        "ungrounded": []
+      }
+    },
+    {
+      "seq": 32,
+      "ts": 1792258883500,
+      "type": "run.completed",
+      "agent": "orchestrator",
+      "data": {
+        "metrics": {
+          "tool_calls": 14,
+          "duration_ms": 14500,
+          "memories_recalled": 2,
+          "ungrounded_count": 0,
+          "valid_citations_count": 8,
+          "evidence_nodes_count": 12
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{"seq": 0, "ts": 1792258689096, "type": "run.started", "agent": "orchestrator", "data": {"run_id": "run_937837f0", "tenant": "northwind", "mode": "respond", "mission": "Failing run test", "conversation_id": "cnv_62a4057f"}}
+{"seq": 1, "ts": 1792258689096, "type": "agent.status", "agent": "orchestrator", "data": {"status": "Prefetching graph memory..."}}
+{"seq": 2, "ts": 1792258689187, "type": "memory.recalled", "agent": "orchestrator", "data": {"items": {"episodes": ["epi_2041"], "facts": [], "procedures": ["prc_ledger_pool"]}, "count": 2}}
+{"seq": 3, "ts": 1792258689189, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_33216715", "kind": "investigate"}}
+{"seq": 4, "ts": 1792258689190, "type": "task.created", "agent": "orchestrator", "data": {"task_id": "tsk_08d7a666", "kind": "recall"}}
+{"seq": 5, "ts": 1792258689195, "type": "task.claimed", "agent": "archivist", "data": {"task_id": "tsk_08d7a666"}}
+{"seq": 6, "ts": 1792258689196, "type": "agent.status", "agent": "archivist", "data": {"status": "Archivist searching past incidents and runbooks..."}}
+{"seq": 7, "ts": 1792258689196, "type": "task.claimed", "agent": "scout", "data": {"task_id": "tsk_33216715"}}
+{"seq": 8, "ts": 1792258689196, "type": "agent.status", "agent": "scout", "data": {"status": "Scout investigating topology and blast radius..."}}
+{"seq": 9, "ts": 1792258689200, "type": "run.failed", "agent": "orchestrator", "data": {"error": "Investigation failed: Scout error=Simulated network timeout during tool loop, Archivist error=Simulated network timeout during tool loop"}}
